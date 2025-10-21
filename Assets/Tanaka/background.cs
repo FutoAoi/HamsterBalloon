@@ -9,13 +9,13 @@ using System.Collections.Generic;
 [System.Serializable]
 public class BackgroundLayer
 {
-   
-    [Tooltip("スクロール対象の画像")]   
-    private Image image;
+    [Tooltip("スクロール対象の画像")]
+    [SerializeField]
+    public Image image;
 
     [Tooltip("x軸のスクロール速度")]
     [Range(0.1f, 10f)]
-    private float scrollSpeedX = 1f;
+    public float scrollSpeedX = 1f;
 
 }
 
