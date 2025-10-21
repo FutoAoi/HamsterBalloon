@@ -8,4 +8,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Saitou/Titlescene.unity
+    guid: 140e10aa36753284b9f531dec1844d9d
+  - enabled: 1
+    path: Assets/Saitou/GameOverScene.unity
+    guid: 56933a234aa5dcc4894394339d864bef
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0

@@ -5,12 +5,12 @@ public class SoundManager : MonoBehaviour
     public static SoundManager Instance;
 
     [Header("Audio Sources")]
-    public AudioSource bgmSource;
-    public AudioSource seSource;
+    [SerializeField] private AudioSource _bgmSource;
+    [SerializeField] private AudioSource _seSource;
 
     [Header("Audio Clips")]
-    public AudioClip[] bgmClips;
-    public AudioClip[] seClips;
+    [SerializeField] private AudioClip[] _bgmClips;
+    [SerializeField] private AudioClip[] _seClips;
 
     private void Awake()
     {
@@ -28,26 +28,26 @@ public class SoundManager : MonoBehaviour
 
     public void PlayBGM(string name)
     {
-        AudioClip clip = FindClip(bgmClips, name);
+        AudioClip clip = FindClip(_bgmClips, name);
         if (clip == null) return;
 
-        if (bgmSource.clip == clip) return;
+        if (_bgmSource.clip == clip) return;
 
-        bgmSource.clip = clip;
-        bgmSource.Play();
+        _bgmSource.clip = clip;
+        _bgmSource.Play();
     }
 
     public void StopBGM()
     {
-        bgmSource.Stop();
+        _bgmSource.Stop();
     }
 
     public void PlaySE(string name)
     {
-        AudioClip clip = FindClip(seClips, name);
+        AudioClip clip = FindClip(_seClips, name);
         if (clip != null)
         {
-            seSource.PlayOneShot(clip);
+            _seSource.PlayOneShot(clip);
         }
     }
 
