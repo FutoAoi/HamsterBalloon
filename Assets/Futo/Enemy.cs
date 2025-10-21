@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour, ICharacter
 {
@@ -7,11 +9,10 @@ public class Enemy : MonoBehaviour, ICharacter
     [SerializeField] private float _attackSpan;
     [SerializeField] private BulletControlloer _bulletPrehab;
     [SerializeField] private float _bulletSpeed;
-    [SerializeField] GameObject _b;
 
-    float _timer;
-    Vector2 _nowPsition;
-    Transform _tf;
+    private float _timer;
+    private Vector2 _nowPsition;
+    private Transform _tf;
 
     public int Hp => _hp;
     public float MoveSpeed => _moveSpeed;
@@ -34,7 +35,7 @@ public class Enemy : MonoBehaviour, ICharacter
         _timer += Time.deltaTime;
         if(_timer > _attackSpan)
         {
-            BulletControlloer bullet = Instantiate(_bulletPrehab, _b.transform.position, Quaternion.Euler(0, 0, 90f));
+            BulletControlloer bullet = Instantiate(_bulletPrehab, _tf.position, Quaternion.Euler(0, 0, 90f));
             bullet._bulletSpeed = _bulletSpeed;
             _timer = 0;
         }
@@ -54,6 +55,7 @@ public class Enemy : MonoBehaviour, ICharacter
             Die();
         }
     }
+
 
     public void Move()
     {
