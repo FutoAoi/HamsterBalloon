@@ -4,8 +4,9 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
-
+    
     [SerializeField] FadeManager _fadeManager;
+
     public void SceneChange(int sceneIndex)
     {
         StartCoroutine(ChangeSceneRoutine(sceneIndex));
@@ -20,11 +21,6 @@ public class GameManager : MonoBehaviour
       
         Application.Quit();
 #endif
-    }
-
-    public void GameOver()
-    {
-        SceneManager.LoadScene(2);
     }
 
     IEnumerator ChangeSceneRoutine(int sceneIndex)
