@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class OptionMenu : MonoBehaviour
 {
-    [SerializeField] GameObject _optionPrefab; // オプションUIのPrefab
-    GameObject optionInstance;
+    [SerializeField] GameObject optionWindow;
 
     public void OpenOption()
     {
-        if (optionInstance == null)
-        {
-            Canvas canvas = FindFirstObjectByType<Canvas>();
-            optionInstance = Instantiate(_optionPrefab, canvas.transform);
-        }
+        optionWindow.SetActive(true); // 表示
+    }
+
+    public void Close()
+    {
+        gameObject.SetActive(false); // 非表示に戻す
     }
 }
