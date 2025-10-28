@@ -1,11 +1,14 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
-    public void SceneChange(int i)
+
+    [SerializeField] FadeManager _fadeManager;
+    public void SceneChange(int sceneIndex)
     {
-        SceneManager.LoadScene(i);
+        StartCoroutine(ChangeSceneRoutine(sceneIndex));
     }
 
     public void EndGame()
@@ -22,5 +25,15 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         SceneManager.LoadScene(2);
+    }
+
+    IEnumerator ChangeSceneRoutine(int sceneIndex)
+    {
+        _fadeManager.StartFadeOut();
+        yield return new WaitUntil(() => !_fadeManager.IsFading);
+
+        SceneManager.LoadScene(sceneIndex);
+
+        _fadeManager.StartFadeIn();
     }
 }
