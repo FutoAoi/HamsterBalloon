@@ -1,17 +1,17 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour, ICharacter
 {
     [SerializeField] private int _hp;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _attackSpan;
+    [SerializeField] private float _hitStan;
     [SerializeField] private BulletControlloer _bullet;
     [SerializeField] private Vector2 _junpPower;
-    [SerializeField] private Vector2 _downPower;
     [SerializeField] private float _bulletSpeed;
     [SerializeField] private GameObject[] _balloons;
+    [SerializeField] private GameManager _gameManager;
 
     private int _nextBallonNumber = 0;
     private Rigidbody2D _rb;
@@ -30,6 +30,7 @@ public class Player : MonoBehaviour, ICharacter
         _rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _originalColor = _spriteRenderer.color;
+        _gameManager = FindAnyObjectByType<GameManager>();
     }
     private void Update()
     {
@@ -38,7 +39,7 @@ public class Player : MonoBehaviour, ICharacter
 
     public void Move()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !_isHit)
         {
             _rb.AddForce(_junpPower);
             Attack();
@@ -46,7 +47,7 @@ public class Player : MonoBehaviour, ICharacter
     }
     public void Attack()
     {
-        BulletControlloer bullet = Instantiate(_bullet,transform.position,Quaternion.Euler(0, 0, -90));
+        BulletControlloer bullet = Instantiate(_bullet,transform.position,Quaternion.Euler(0, 0, 0));
         bullet._bulletSpeed = _bulletSpeed;
     }
 
@@ -60,15 +61,15 @@ public class Player : MonoBehaviour, ICharacter
         _nextBallonNumber++;
 
         _hp -= damage;
-        if(_hp < 0)
+        if(_hp <= 0)
         {
             Die();
+            _hp = 0;
         }
     }
     public void Die()
     {
-        Debug.Log("Ž€");
-    
+        _gameManager.SceneChange(2);
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
@@ -82,9 +83,9 @@ public class Player : MonoBehaviour, ICharacter
     IEnumerator HitInvincibilityTime()
     {
         _isHit = true;
-        _rb.AddForce(_downPower);
+        _rb.linearVelocity = Vector3.zero;
         _spriteRenderer.color = Color.red;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(_hitStan);
         _spriteRenderer.color = _originalColor;
         _isHit = false;
     }

@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour, ICharacter
         _timer += Time.deltaTime;
         if(_timer > _attackSpan)
         {
-            BulletControlloer bullet = Instantiate(_bulletPrehab, _tf.position, Quaternion.Euler(0, 0, 90f));
+            BulletControlloer bullet = Instantiate(_bulletPrehab, _tf.position, Quaternion.Euler(0, 0, 180f));
             bullet._bulletSpeed = _bulletSpeed;
             _timer = 0;
         }
