@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - Wall
+  - Body
+  - Bulloon
   layers:
   - Default
   - TransparentFX
@@ -15,7 +17,7 @@ TagManager:
   - 
   - 
   - enemy
-  - 
+  - Player
   - 
   - 
   - 

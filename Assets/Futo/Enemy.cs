@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour, ICharacter
     [SerializeField] private float _attackSpan;
     [SerializeField] private BulletControlloer _bulletPrehab;
     [SerializeField] private float _bulletSpeed;
+    [SerializeField] private int _destloyX = -20;
 
     private float _timer;
     private Vector2 _nowPsition;
@@ -59,8 +60,10 @@ public class Enemy : MonoBehaviour, ICharacter
 
     public void Move()
     {
-        _nowPsition += new Vector2(_moveSpeed, 0f);
-        _tf.position = _nowPsition;
+        _tf.Translate(Vector3.left * _moveSpeed * Time.deltaTime, Space.World);
+        if(_tf.position.x < _destloyX)
+        {
+            Destroy(gameObject);
+        }
     }
-
 }
