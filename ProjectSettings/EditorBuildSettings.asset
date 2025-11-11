@@ -5,16 +5,22 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Saitou/Titlescene.unity
+    path: Assets/Scenes/Titlescene.unity
     guid: 140e10aa36753284b9f531dec1844d9d
   - enabled: 1
-    path: Assets/Saitou/GameOverScene.unity
+    path: Assets/Scenes/GameOverScene.unity
     guid: 56933a234aa5dcc4894394339d864bef
   - enabled: 1
+    path: Assets/Scenes/Stage1.unity
+    guid: 6bb21b3bf028ada4cb16e6f513dfe1a4
+  - enabled: 1
+    path: Assets/Scenes/GameClearScene 1.unity
+    guid: 3c497634887364542a662444bd19c72d
+  - enabled: 0
     path: Assets/Futo/FutoScene.unity
     guid: 3c229d4438d343047a2b5b4535f2dfef
   m_configObjects: {}
