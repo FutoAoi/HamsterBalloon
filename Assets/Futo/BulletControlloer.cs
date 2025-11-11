@@ -28,6 +28,10 @@ public class BulletControlloer : MonoBehaviour
                 character.Hit(1);
                 Destroy(gameObject);
             }
+            if(collision.gameObject.CompareTag("Body"))
+            {
+                collision.gameObject.GetComponent<Player>().Stan();
+            }
         }
 
         if (collision.gameObject.CompareTag("Wall"))
