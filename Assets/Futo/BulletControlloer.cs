@@ -23,8 +23,11 @@ public class BulletControlloer : MonoBehaviour
         ICharacter character = collision.gameObject.GetComponent<ICharacter>();
         if (character != null)
         {
-            character.Hit(1);
-            Destroy(gameObject);
+            if(collision.gameObject.CompareTag("Bulloon"))
+            {
+                character.Hit(1);
+                Destroy(gameObject);
+            }
         }
 
         if (collision.gameObject.CompareTag("Wall"))

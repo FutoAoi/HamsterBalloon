@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, ICharacter
 {
-    [SerializeField] private int _hp;
+    [SerializeField] private int _MaxHp;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _attackSpan;
     [SerializeField] private float _hitStan;
@@ -14,12 +14,13 @@ public class Player : MonoBehaviour, ICharacter
     [SerializeField] private GameManager _gameManager;
 
     private int _nextBallonNumber = 0;
+    private int _currentHp;
     private Rigidbody2D _rb;
     private SpriteRenderer _spriteRenderer;
     private bool _isHit = false;
     private Color _originalColor;
 
-    public int Hp => _hp;
+    public int Hp => _currentHp;
     public float MoveSpeed => _moveSpeed;
     public float AttackSpan => _attackSpan;
     public BulletControlloer Bullet => _bullet;
@@ -31,6 +32,8 @@ public class Player : MonoBehaviour, ICharacter
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _originalColor = _spriteRenderer.color;
         _gameManager = FindAnyObjectByType<GameManager>();
+        _MaxHp = _balloons.Length;
+        _currentHp = _MaxHp;
     }
     private void Update()
     {
@@ -60,16 +63,29 @@ public class Player : MonoBehaviour, ICharacter
         _balloons[_nextBallonNumber].SetActive(false);
         _nextBallonNumber++;
 
-        _hp -= damage;
-        if(_hp <= 0)
+        _currentHp -= damage;
+        if(_currentHp <= 0)
         {
             Die();
-            _hp = 0;
+            _currentHp = 0;
         }
     }
+
     public void Die()
     {
         _gameManager.SceneChange(2);
+    }
+
+    public void Heal(int heal = 1)
+    {
+        Debug.Log("Heal");
+        if(_currentHp < _MaxHp)
+        {
+            _nextBallonNumber--;
+            _balloons[_nextBallonNumber].SetActive(true);
+
+            _currentHp += heal;
+        }
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
