@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
+        Application.targetFrameRate = 60;
         _fadeManager = FindAnyObjectByType<FadeManager>();
         switch (_scene)
         {
@@ -32,8 +33,12 @@ public class GameManager : MonoBehaviour
                 SoundManager.Instance.PlayBGM("楽しいハムスターのダンス");
                 break;
             case nowScene.GameClear:
+                SoundManager.Instance.StopBGM();
+                SoundManager.Instance.PlayBGM("勝利のテーマ");
                 break;
             case nowScene.GameOver:
+                SoundManager.Instance.StopBGM();
+                SoundManager.Instance.PlayBGM("suteneko ha amenonaka 1");
                 break;
             default:
                 break;
@@ -46,6 +51,11 @@ public class GameManager : MonoBehaviour
             _fadeManager = FindAnyObjectByType<FadeManager>();
         }
         StartCoroutine(ChangeSceneRoutine(sceneIndex));
+    }
+
+    public void ButtonSe()
+    {
+        SoundManager.Instance.PlaySE("決定ボタンを押す12");
     }
 
     public void EndGame()

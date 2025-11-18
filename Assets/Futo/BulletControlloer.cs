@@ -18,23 +18,14 @@ public class BulletControlloer : MonoBehaviour
         _tf.position = _nowPosition;
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        ICharacter character = collision.gameObject.GetComponent<ICharacter>();
-        if (character != null)
-        {
-            if(collision.gameObject.CompareTag("Bulloon"))
-            {
-                character.Hit(1);
-                Destroy(gameObject);
-            }
-            if(collision.gameObject.CompareTag("Body"))
-            {
-                collision.gameObject.GetComponent<Player>().Stan();
-            }
-        }
-
         if (collision.gameObject.CompareTag("Wall"))
+        {
+            SoundManager.Instance.PlaySE("ÉJÅ[É\Éãà⁄ìÆ9");
+            Destroy(gameObject);
+        }
+        if(collision.gameObject.CompareTag("BulletWall"))
         {
             Destroy(gameObject);
         }

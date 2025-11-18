@@ -9,8 +9,11 @@ public class OptionMenu : MonoBehaviour
 
     private void Start()
     {
-        _bgmSlider.value = 1.0f;
-        _seSlider.value = 1.0f;
+        _bgmSlider.value = 0.1f;
+        _seSlider.value = 0.1f;
+
+        SoundManager.Instance._bgmSource.volume = _bgmSlider.value;
+        SoundManager.Instance._seSource.volume = _seSlider.value;
 
         _bgmSlider.onValueChanged.AddListener(OnBGMVolumeChanged);
         _seSlider.onValueChanged.AddListener(OnSEVolumeChanged);

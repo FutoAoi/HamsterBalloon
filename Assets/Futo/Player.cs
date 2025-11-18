@@ -44,7 +44,7 @@ public class Player : MonoBehaviour, ICharacter
 
     public void Move()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !_isHit)
+        if (Input.GetMouseButtonDown(0) && !_isHit)
         {
             _rb.AddForce(_junpPower);
             Attack();
@@ -53,17 +53,17 @@ public class Player : MonoBehaviour, ICharacter
     public void Attack()
     {
         if (_isStan) return;
-        SoundManager.Instance.PlaySE("…“H1");
+        SoundManager.Instance.PlaySE("Onoma-Pop04-2(Mid-Dry)");
         BulletControlloer bullet1 = Instantiate(_bullet, transform.position, Quaternion.Euler(0, 0, 0));
         bullet1._bulletSpeed = _bulletSpeed;
         if(_bulletLevel >= 1)
         {
-            BulletControlloer bullet2 = Instantiate(_bullet, transform.position + new Vector3(0,0.5f,0), Quaternion.Euler(0, 0, 0));
+            BulletControlloer bullet2 = Instantiate(_bullet, transform.position + new Vector3(0,0.3f,0), Quaternion.Euler(0, 0, 0));
             bullet2._bulletSpeed = _bulletSpeed;
         }
         if (_bulletLevel >= 2)
         {
-            BulletControlloer bullet3 = Instantiate(_bullet, transform.position + new Vector3(0, -0.5f, 0), Quaternion.Euler(0, 0, 0));
+            BulletControlloer bullet3 = Instantiate(_bullet, transform.position + new Vector3(0, -0.3f, 0), Quaternion.Euler(0, 0, 0));
             bullet3._bulletSpeed = _bulletSpeed;
         }
     }
@@ -77,6 +77,7 @@ public class Player : MonoBehaviour, ICharacter
 
         _balloons[_nextBallonNumber].SetActive(false);
         _nextBallonNumber++;
+
 
         _currentHp -= damage;
         if(_currentHp <= 0)
@@ -123,6 +124,7 @@ public class Player : MonoBehaviour, ICharacter
 
     public void Stan()
     {
+        SoundManager.Instance.PlaySE("ƒLƒƒƒ“ƒZƒ‹6");
         StartCoroutine(StanTime());
     }
 
@@ -130,7 +132,7 @@ public class Player : MonoBehaviour, ICharacter
     {
         _isStan = true;
         _spriteRenderer.color = Color.yellow;
-        yield return new WaitForSeconds(_hitStan);
+        yield return new WaitForSeconds(1.5f);
         _spriteRenderer.color = _originalColor;
         _isStan = false;
     }
