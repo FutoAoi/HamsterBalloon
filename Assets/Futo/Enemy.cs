@@ -1,6 +1,4 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour, ICharacter
 {
@@ -50,13 +48,13 @@ public class Enemy : MonoBehaviour, ICharacter
     public void Hit(int damage)
     {
         _hp -= damage;
-        if(_hp < 0)
+        SoundManager.Instance.PlaySE("ƒJ[ƒ\ƒ‹ˆÚ“®9");
+        if (_hp < 0)
         {
             _hp = 0;
             Die();
         }
     }
-
 
     public void Move()
     {
@@ -64,6 +62,15 @@ public class Enemy : MonoBehaviour, ICharacter
         if(_tf.position.x < _destloyX)
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            Hit(1);
+            Destroy(collision.gameObject);
         }
     }
 }

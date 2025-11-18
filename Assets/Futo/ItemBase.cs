@@ -24,9 +24,10 @@ public abstract class ItemBase : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        if (collision.gameObject.CompareTag("Body"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             _target = collision.gameObject;
+            SoundManager.Instance.PlaySE("Œˆ’èƒ{ƒ^ƒ“‚ð‰Ÿ‚·40");
             Excute();
             Destroy(gameObject);
         }

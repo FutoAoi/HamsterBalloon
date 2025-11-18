@@ -8,6 +8,8 @@ TagManager:
   - Body
   - Bulloon
   - ClearWall
+  - Bullet
+  - BulletWall
   layers:
   - Default
   - TransparentFX
